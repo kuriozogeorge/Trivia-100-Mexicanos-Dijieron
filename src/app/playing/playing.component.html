@@ -1,0 +1,70 @@
+<div *ngIf="trivia">
+    <div *ngIf="trivia.triviaAdmin" class="tablero">
+        <div class="container">
+            <div class="box">
+                <div>
+                    <h1 class="text-center tracking-in-expand tituloTrivia">{{trivia.triviaName}}</h1>
+                </div>                
+                <div class="row puntos">
+                    <div class="col-md-4"><h2>{{trivia.triviaPointsGroup1}}</h2></div>
+                    <div class="col-md-4 totalPuntos"><h1>{{trivia.triviaTotalPoints}}</h1></div>
+                    <div class="col-md-4"><h2>{{trivia.triviaPointsGroup2}}</h2></div>
+                </div>
+                <div class="respuestas">
+                    <div *ngFor=" let item of trivia.triviaQuestions.preguntas; let i = index">
+                        <div *ngIf="item.activo">
+                            <div class="row" *ngFor=" let itemm of item.respuestas; let ii = index">
+                                <div class="col-md-1"><h1>{{ii+1}}</h1></div>
+                                <div class="col-md-9 texto"><h1 *ngIf="itemm.activo">{{itemm.respuesta}}<span>&#160;</span></h1></div>
+                                <div class="col-md-2"><h1 *ngIf="itemm.activo">{{itemm.puntos}}</h1></div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row" *ngIf="trivia.triviaActivarStrike">
+                <div class="strike" *ngFor="let x of counterStrike(trivia.triviaStrike)">
+                    <img src="../../assets/image/strike.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--div *ngIf="!trivia.triviaAdmin">
+        <div class="espera">
+            <p>
+                <ngb-alert [dismissible]="false">
+                    <strong>Esperando Administrador.!</strong> <br/>
+                    Registra tu administrador en /admin desde otro navegador o dispositivo<br/>
+                    Ingresa el codigo <strong>{{key}}</strong>
+                </ngb-alert>
+            </p>
+            
+        </div>
+    </div-->
+</div>
+
+
+<div *ngIf="key==null">
+    <div class="espera">
+        <p>
+            <ngb-alert [dismissible]="false">
+                <strong>No hay ningun juego creado.!</strong> <br/>
+                Registra tu juego en /register<br/>
+                Si ya creaste tu juego y no ves tu codigo actualiza la página o presiona F5
+            </ngb-alert>
+        </p>
+        
+    </div>
+</div>
+<div *ngIf="key!=null">
+    <div class="espera">
+        <p>
+            <ngb-alert [dismissible]="false">
+                <strong>Esperando Administrador.!</strong> <br/>
+                Registra tu administrador en /admin desde otro navegador o dispositivo<br/>
+                Ingresa el codigo <strong>{{key}}</strong>
+            </ngb-alert>
+        </p>        
+    </div>
+</div>

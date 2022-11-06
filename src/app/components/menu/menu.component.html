@@ -1,0 +1,17 @@
+<header *ngIf="menu">
+    <div class="container text-center">
+        <span class="tituloHome">
+            Trivia 100 Mexicanos Dijieron
+        </span>
+    </div>
+    <nav class="menuInicio">
+        <div class="container">
+            <ul>
+                <li><a class="button" routerLink="/" [attr.class]="menu=='home'?'isDisbled':''">Inicio</a></li>
+                <li><a class="button" routerLink="/register" [attr.class]="menu=='register'?'isDisbled':''">Registrar trivia</a></li>
+                <li><a class="button" routerLink="/admin" [attr.class]="menu=='admin'?'isDisbled':''">Registrar administrador</a></li>
+                <li><a class="button" routerLink="/trivia" [attr.class]="menu=='trivia'?'isDisbled':''">Registrar cuestionario</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>

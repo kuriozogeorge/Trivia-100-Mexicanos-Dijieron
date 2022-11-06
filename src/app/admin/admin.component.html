@@ -1,0 +1,97 @@
+<app-menu menu="admin"></app-menu>
+
+<br/>
+<div *ngIf="!trivia" class="container">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <label for="key">Codigo:</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="key" 
+                aria-describedby="key" 
+                placeholder="-ABcDF0Gh1IjKMl*****" 
+                formControlName="key">
+            <small id="key" class="form-text text-muted">Ingrese el codigo de triva.</small>
+        </div>
+
+        <button 
+            type="submit" 
+            class="btn btn-primary mb-2"
+            >Submit</button>        
+      </form>      
+</div>
+
+<div class="container" *ngIf="trivia">
+    <div class="row">
+        {{trivia.triviaName}}
+    </div>
+    <div class="row">
+        <div class="col-md-6">{{trivia.triviaNameGroup1}} - {{trivia.triviaPointsGroup1}} Puntos</div>
+        <div class="col-md-6">{{trivia.triviaNameGroup2}} - {{trivia.triviaPointsGroup2}} Puntos</div>
+    </div>
+    <div class="row" *ngIf="trivia.triviaWinName!=''">
+        <div class="col-md-6">Ganador - {{trivia.triviaWinName}} </div>
+    </div>
+    <div *ngIf="trivia.triviaQuestions">
+        <div class="row" >
+            <div class="col-md-6">
+                {{trivia.triviaQuestions.titulo}}
+            </div>        
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="respuestas" *ngFor=" let item of trivia.triviaQuestions.preguntas; let i = index">
+                    <div class="row">
+                        <div class="col-md-1"><p>{{i+1}}</p></div>
+                        <div class="col-md-9"><p >{{item.pregunta}}</p>
+                            <div class="row">
+                                <div class="respuestas" *ngFor=" let itemm of item.respuestas; let ii = index">
+                                    <div class="row">
+                                        <div class="col-md-1"><p>{{ii+1}}</p></div>
+                                        <div class="col-md-8"><p >{{itemm.respuesta}}</p></div>
+                                        <div class="col-md-3">
+                                            <button *ngIf="!itemm.activo" (click)="activarRespuesta(itemm,i,ii,itemm.puntos)">Activar</button>
+                                            <button *ngIf="itemm.activo" (click)="desactivarRespuesta(itemm,i,ii)">Desactivar</button>
+                                        </div>                                        
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button *ngIf="item.activo" (click)="sumarPuntosEquipo1(item,i)">Puntos a Equipo 1</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button *ngIf="item.activo" (click)="sumarPuntosEquipo2(item,i)">Puntos a Equipo 2</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button *ngIf="!item.activo" (click)="activarPregunta(item,i)">Activar</button>
+                            <button *ngIf="item.activo" (click)="desactivarPregunta(item,i)">Desactivar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-4">
+                <button *ngIf="!trivia.triviaAdmin" (click)="iniciarJuego()">Iniciar trivia</button>
+                <button *ngIf="trivia.triviaAdmin" (click)="terminarJuego()">Finalizar trivia</button>
+            </div>
+            <div class="col-md-4">
+                <button *ngIf="trivia.triviaStrike<3" (click)="reproducirStrike()">Play Strike</button>
+                <button *ngIf="trivia.triviaStrike==3" (click)="limpiarStrike()">Limpiar Strike</button>
+            </div>
+            <div class="col-md-4">
+                <button (click)="reproducirVictoria()">Play Victoria</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!trivia.triviaQuestions">
+        Dia del Juego: {{trivia.triviaDateCreate}}
+    </div>
+</div>

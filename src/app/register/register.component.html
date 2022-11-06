@@ -1,0 +1,111 @@
+<app-menu menu="register"></app-menu>
+<body class="container">
+    <br/>
+    <ngb-alert #selfClosingAlert 
+        *ngIf="successMessage" 
+        type="warning" 
+        (closed)="successMessage = ''"
+	><p [innerHtml]="successMessage"></p>
+    </ngb-alert>
+
+    
+    <div>
+        <span>Llena los datos de tu triva.</span>
+    </div>
+
+    <div class="registroForm">
+        <form [formGroup]="triviaForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <label for="triviaName">Titulo trivia</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="triviaName" 
+                    aria-describedby="triviaName" 
+                    placeholder="100 Mexicamos Dijieron" 
+                    formControlName="triviaName">
+                <small id="triviaName" class="form-text text-muted">Este titulo se vera en el tablero del juego.</small>
+            </div>
+            <br/>
+
+            <div class="form-group">
+                <label for="triviaNameGroup1">Nombre Equipo Uno</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="triviaNameGroup1" 
+                    aria-describedby="triviaNameGroup1" 
+                    placeholder="Familia Lopez" 
+                    formControlName="triviaNameGroup1">
+                <small id="triviaNameGroup1" class="form-text text-muted">Seria el nombre para el primer grupo.</small>
+            </div>
+            <br/>
+
+            <div class="form-group">
+                <label for="triviaNameGroup2">Nombre Equipo Dos</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="triviaNameGroup2" 
+                    aria-describedby="triviaNameGroup2" 
+                    placeholder="Familia Perez" 
+                    formControlName="triviaNameGroup2">
+                <small id="triviaNameGroup2" class="form-text text-muted">Seria el nombre para el segundo grupo.</small>
+            </div>
+            <br/>
+
+            <div class="form-group">
+                <label for="triviaName">Escoja encuesta</label>
+                <select 
+                    class="form-control" 
+                    id="triviaQuestions" 
+                    formControlName="triviaQuestion"
+                    (change)="cargaEncuenta()"
+                    >
+                    <option value="0" selected>Seleccione un cuestionario</option>
+                    <option *ngFor="let i of encuestas" value={{i.key}}>{{i.titulo}}</option>
+                  </select>                
+                <small id="triviaName" class="form-text text-muted">Si no existe la encuenta genere uno en Registrar cuestionario en el menu.</small>
+            </div>
+            <br/>
+
+            <div class="form-group visually-hidden">                
+                <input 
+                    type="hidden" 
+                    class="form-control" 
+                    id="triviaQuestion" 
+                    aria-describedby="triviaQuestion" 
+                    placeholder="Familia Perez" 
+                    formControlName="triviaQuestions">
+                <small id="triviaQuestion" class="form-text text-muted">Seria el nombre para el segundo grupo.</small>
+            </div>
+
+            <div class="form-group visually-hidden">                
+                <input 
+                    type="hidden" 
+                    formControlName="triviaDateCreate">
+            </div>
+
+            <div class="form-check">
+                <input 
+                    class="form-check-input position-static" 
+                    type="checkbox" 
+                    id="blankCheckbox" 
+                    value="true" aria-label="..."
+                    formControlName="triviaTermConditions"                    
+                    [(ngModel)]="isChecked"
+                    >
+                    Acepto <a href="#">Terminos y condiciones.</a>
+            </div>
+            <br/>
+
+            <button 
+                type="submit" 
+                class="btn btn-primary mb-2"
+                [disabled]="!isChecked">Submit</button>
+            
+          </form>
+          
+    </div>
+</body>

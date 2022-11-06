@@ -1,0 +1,146 @@
+.tituloTrivia{
+  font-family: 'Mythias';
+  font-size: 60px;
+  //background: url('../../assets/image/triviaTitulo2.png') no-repeat;
+  //margin: auto;
+  //min-width: 250;
+  //min-height: 150;
+}
+.playing{
+  background-repeat: no-repeat;
+  background-image: url('../../assets/image/backgrounTrivia.jpg');
+}
+.tablero{
+    //background-color: black;
+    color: #FFF;
+}
+.puntos{
+    text-align: center;
+}
+.espera{
+  margin: 20%;
+}
+.strike img{
+  width: 80px;
+  height: 80px;
+}
+.respuestas{
+    margin: 2%;
+    padding: 5%;
+    border-style: solid ;
+    border-color: #fff;
+    background-color: #000;
+    box-shadow: inset 0 0 5px red, 0 0 10px red;
+    border-radius: 60px;
+    min-height: 50vh; 
+    /*position: relative;
+       
+    overflow: hidden;*/
+}
+/*.respuestas::before{
+    content: '';
+    position: absolute;
+    right: 40%;
+    top: 0px;
+    width: 20%;
+    height: 400%;
+    background: linear-gradient(#00ccff,#d400da);
+    animation: borde 4s linear infinite;
+}
+.respuestas::after{
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: #000 ;
+}*/
+
+.respuestas h1{
+    position: relative;
+    z-index: 10;
+}
+
+.resultados{
+    text-align: center;
+}
+.totalPuntos{
+    border-style: dotted;
+    border-color: yellow;
+}
+.visible {
+    opacity: 1;
+}
+.invisible {
+    opacity: 0;
+}
+// Texto animado maquina de escribir
+.texto{
+  border-bottom: 3px dotted #FFF;
+}
+.texto h1{
+    float:left;
+    color: #FFF;
+    position:relative;
+}
+.texto span{
+    position: absolute;
+    right: 0;
+    width: 0;
+    background: #000;
+    //border-left: 1px solid #fff;
+    animation: maquina 1s  ;
+}
+@keyframes maquina {
+    from { 
+        width: 100%;
+    }
+    to {
+        width: 0;
+    }
+}
+
+@keyframes borde {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+.box{
+    //background-color: aqua;
+}
+
+//animations
+.tracking-in-expand {
+	-webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	        animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+ @-webkit-keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
