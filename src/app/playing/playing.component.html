@@ -1,30 +1,40 @@
-<div *ngIf="trivia">
+<div class="luz" *ngIf="trivia.triviaAdmin && trivia" >
     <div *ngIf="trivia.triviaAdmin" class="tablero">
-        <div class="container">
+        <div class="container-fluid px-4">
             <div class="box">
                 <div>
                     <h1 class="text-center tracking-in-expand tituloTrivia">{{trivia.triviaName}}</h1>
                 </div>                
                 <div class="row puntos">
-                    <div class="col-md-4"><h2>{{trivia.triviaPointsGroup1}}</h2></div>
-                    <div class="col-md-4 totalPuntos"><h1>{{trivia.triviaTotalPoints}}</h1></div>
-                    <div class="col-md-4"><h2>{{trivia.triviaPointsGroup2}}</h2></div>
-                </div>
-                <div class="respuestas">
+                    <div class="col-md-4 tituloTrivia  tracking-in-expand"><h1>{{trivia.triviaNameGroup1}}</h1></div>
+                    <div class="col-md-4 m-auto totalPuntos"><h1>{{trivia.triviaTotalPoints}}</h1></div>
+                    <div class="col-md-4 tituloTrivia  tracking-in-expand"><h1>{{trivia.triviaNameGroup2}}</h1></div>
+                </div> 
+            <div class="row align-items-center">
+                <div class="col-md-2 totalPuntos"><h2>{{trivia.triviaPointsGroup1}}</h2></div>
+                <div class="respuestas col-8 m-auto">
                     <div *ngFor=" let item of trivia.triviaQuestions.preguntas; let i = index">
                         <div *ngIf="item.activo">
                             <div class="row" *ngFor=" let itemm of item.respuestas; let ii = index">
-                                <div class="col-md-1"><h1>{{ii+1}}</h1></div>
-                                <div class="col-md-9 texto"><h1 *ngIf="itemm.activo">{{itemm.respuesta}}<span>&#160;</span></h1></div>
-                                <div class="col-md-2"><h1 *ngIf="itemm.activo">{{itemm.puntos}}</h1></div>
+                                <div class="col-md-1"><h2>{{ii+1}}</h2></div>
+                                <div class="col-md-11 texto">
+                                    <div class="row">
+                                        <h2 class=" col-auto p-0" *ngIf="itemm.activo">{{itemm.respuesta}}</h2>
+                                        <div class="col dotted" *ngIf="itemm.activo"></div>
+                                        <div class="col-md-2"><h2 *ngIf="itemm.activo">{{itemm.puntos}}</h2></div>
+                                        <span>&#160;</span>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>                        
                     </div>
                 </div>
-                
+                <div class="col-md-2 totalPuntos"><h2>{{trivia.triviaPointsGroup2}}</h2></div>
             </div>
-            <div class="row" *ngIf="trivia.triviaActivarStrike">
-                <div class="strike" *ngFor="let x of counterStrike(trivia.triviaStrike)">
+            </div>
+            <div class="row mt-2 justify-content-center strike-center" *ngIf="trivia.triviaActivarStrike">
+                <div class="strike col-auto " *ngFor="let x of counterStrike(trivia.triviaStrike)">
                     <img src="../../assets/image/strike.png" />
                 </div>
             </div>
