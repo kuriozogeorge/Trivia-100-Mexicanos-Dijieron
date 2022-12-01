@@ -1,4 +1,4 @@
-<div class="luz" *ngIf="trivia.triviaAdmin && trivia" >
+<div class="luz" *ngIf="trivia?.triviaAdmin && trivia" >
     <div *ngIf="trivia.triviaAdmin" class="tablero">
         <div class="container-fluid px-4">
             <div class="box">
@@ -6,12 +6,12 @@
                     <h1 class="text-center tracking-in-expand tituloTrivia">{{trivia.triviaName}}</h1>
                 </div>                
                 <div class="row puntos">
-                    <div class="col-md-4 tituloTrivia  tracking-in-expand"><h1>{{trivia.triviaNameGroup1}}</h1></div>
-                    <div class="col-md-4 m-auto totalPuntos"><h1>{{trivia.triviaTotalPoints}}</h1></div>
-                    <div class="col-md-4 tituloTrivia  tracking-in-expand"><h1>{{trivia.triviaNameGroup2}}</h1></div>
+                    <div class="col-4 tituloTrivia  tracking-in-expand"><h1>{{trivia.triviaNameGroup1}}</h1></div>
+                    <div class="col-4 m-auto totalPuntos"><h1>{{trivia.triviaTotalPoints}}</h1></div>
+                    <div class="col-4 tituloTrivia  tracking-in-expand"><h1>{{trivia.triviaNameGroup2}}</h1></div>
                 </div> 
             <div class="row align-items-center">
-                <div class="col-md-2 totalPuntos"><h2>{{trivia.triviaPointsGroup1}}</h2></div>
+                <div class="col-2 totalPuntos"><h2>{{trivia.triviaPointsGroup1}}</h2></div>
                 <div class="respuestas col-8 m-auto">
                     <div *ngFor=" let item of trivia.triviaQuestions.preguntas; let i = index">
                         <div *ngIf="item.activo">
@@ -30,7 +30,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-md-2 totalPuntos"><h2>{{trivia.triviaPointsGroup2}}</h2></div>
+                <div class="col-2 totalPuntos"><h2>{{trivia.triviaPointsGroup2}}</h2></div>
             </div>
             </div>
             <div class="row mt-2 justify-content-center strike-center" *ngIf="trivia.triviaActivarStrike">
@@ -55,7 +55,7 @@
 </div>
 
 
-<div *ngIf="key==null">
+<div *ngIf="key==null || trivia==null">
     <div class="espera">
         <p>
             <ngb-alert [dismissible]="false">
@@ -67,7 +67,7 @@
         
     </div>
 </div>
-<div *ngIf="key!=null">
+<div *ngIf="key!=null && !trivia?.triviaAdmin">
     <div class="espera">
         <p>
             <ngb-alert [dismissible]="false">
