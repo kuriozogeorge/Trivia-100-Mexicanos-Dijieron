@@ -61,10 +61,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <button *ngIf="item.activo" (click)="sumarPuntosEquipo1(item,i)">Puntos a Equipo 1</button>
+                                    <button *ngIf="item.activo" (click)="sumarPuntosEquipo1(item,i)">Puntos a {{trivia.triviaNameGroup1}}</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <button *ngIf="item.activo" (click)="sumarPuntosEquipo2(item,i)">Puntos a Equipo 2</button>
+                                    <button *ngIf="item.activo" (click)="sumarPuntosEquipo2(item,i)">Puntos a {{trivia.triviaNameGroup2}}</button>
                                 </div>
                             </div>
                         </div>

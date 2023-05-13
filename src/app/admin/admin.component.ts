@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
   audioCorrecto = new Audio('../../assets/audio/correcto.mp3');
   audioVictoria = new Audio('../../assets/audio/timbre.mp4');
   audioInicio = new Audio('../../assets/audio/inicio.mp3');
+  audioEntrada = new Audio('../../assets/audio/entrada.mp3');
 
   constructor(
     public apiService: Service
@@ -50,10 +51,11 @@ export class AdminComponent implements OnInit {
   iniciarJuego(){
     this.trivia.triviaAdmin=true;
     this.apiService.updateTrivia(this.trivia);
-    this.audioInicio.play();
+    this.audioEntrada.play();
   }
 
   terminarJuego(){
+    this.audioEntrada.play();
     let point1 = this.trivia.triviaPointsGroup1;
     let point2 = this.trivia.triviaPointsGroup2;
 
