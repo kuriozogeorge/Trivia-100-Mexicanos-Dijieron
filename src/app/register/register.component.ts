@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
   key: string | null;
   encuestas: Encuesta[];
   isChecked: boolean | false;
+  loading: boolean | false;
 
   constructor(
     public apiService: Service,
@@ -61,12 +62,18 @@ export class RegisterComponent implements OnInit {
   encuestaForm : FormGroup;
 
   onSubmit() {
+    this.loading = true;
     this.apiService.endTrivida();
     let data : Trivias = this.triviaForm.value;
    
     if( data.triviaTermConditions && data.triviaQuestion!='0'){ 
       this.apiService.addTrivia(data);
-      this.router.navigate(['/playing']);
+      setTimeout(() => {        
+        this.key = JSON.parse(localStorage.getItem('key')!);
+        this.loading = false;
+        this.router.navigate(['/playing']);
+      }, 5000); 
+      
     }else{      
       this._success.next(this.validateInputForm(data));
     }
