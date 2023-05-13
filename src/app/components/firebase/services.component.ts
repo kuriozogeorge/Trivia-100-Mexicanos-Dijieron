@@ -87,7 +87,7 @@ import { Respuesta } from "../models/respuestas";
         return this.encuestasRef;
     }
 
-    getEncuenta(key : string){
+    getEncuesta(key : string){
         let url = 'encuesta/'+key;
         this.encuestaRef = this.db.object(url);
         return this.encuestaRef;
@@ -121,6 +121,27 @@ import { Respuesta } from "../models/respuestas";
         let url = 'trivias/' + key + "/triviaQuestions";
         this.preguntaRef = this.db.object( url );
         this.preguntaRef.remove();
+    }
+
+    addEncuentas(encuesta : Encuesta){
+        const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+        let encuestaKey = '' as any;
+        this.encuestasRef = this.db.list('encuesta');
+        this.encuestasRef.push({
+            titulo: encuesta.titulo,
+            preguntas: encuesta.preguntas
+        }).then( response=>{
+            encuestaKey = response.key;
+            localStorage.setItem('keyEncuesta',JSON.stringify(response.key));
+        });
+
+        return encuestaKey;
+    }
+
+    deleteEncuesta(key : string){
+        let url = 'encuesta/'+key;
+        this.encuestaRef = this.db.object(url);
+        this.encuestaRef.remove();
     }
 
 

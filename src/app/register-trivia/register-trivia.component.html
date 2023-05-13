@@ -1,3 +1,96 @@
 <app-menu menu="trivia"></app-menu>
+<body class="container">
+    <div *ngIf="key!=null">
+        <p>
+            <ngb-alert [dismissible]="false">
+                <strong>Encuesta creada.!</strong> <br/>
+                Tu encuesta ah sido creada exitosamente<br/>
+                Codigo de encuesta: <strong>{{key}}</strong>
+            </ngb-alert>
+        </p>  
+        <br/>
+    </div>
 
-<p>register-trivia works!</p>
+    <p>Agrega tu propio cuestionario de preguntas mediante un archivo excel o un archivo de texto.</p>
+    <p>Para el contenido de los archivos se deben considerar que cada pregunta debe tener 4 respuestas
+        cada una debe de contener su puntuaje, la sumatoria de los puntos debe ser 100 para cada pregunta,
+         la distribucion de los puntos para cada pregunta queda a consideracion de cada uno.        
+    </p>
+    <p>Ejemplo de la estructura del archivo:</p>
+    <ul>
+        <!--li>
+            <a href="https://kuriozotrivia.s3.amazonaws.com/Documento.txt" alt="Texto">
+                <img src="../../assets/icons/iconText.png" width="20px" height="25px">
+                *.txt
+            </a>
+        </li-->
+        <li>
+            <a href="https://kuriozotrivia.s3.amazonaws.com/Libro1.xlsx" alt="Excel">
+                <img src="../../assets/icons/iconExcel.png" width="20px" height="25px">
+                *.xlsx
+            </a>
+        </li>
+    </ul>
+    <div class="registroForm">
+        <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+            <p *ngIf="tituloFlag" id="questionTitle" class="form-text text-muted">Por favor ingrese un titulo a la encuesta.</p>
+            <div class="form-group">
+                <!--label for="questionName">Titulo de Cuestionario</label-->
+                <small id="questionName" class="form-text text-muted">Titulo del cuestionario.</small>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="questionName" 
+                    aria-describedby="questionName" 
+                    placeholder="Preguntas basicas" 
+                    formControlName="questionName">                
+            </div>
+            <div class="form-group">
+                <!--label for="questionFile">Titulo de Cuestionario</label-->
+                <small id="questionFile" class="form-text text-muted">Archivo (*.txt o *.xlsx) del cuestionario.</small>
+                <p *ngIf="valid" id="questionFile" class="form-text text-muted">Archivo invalido, por favor selecciones otro.</p>
+                <input 
+                    type="file" 
+                    class="form-control" 
+                    id="questionFile" 
+                    aria-describedby="questionFile" 
+                    formControlName="questionFile"
+                    (change)="onFileChange($event)">                
+            </div>
+            <br/>
+            <div *ngIf="loading">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only"></span>
+                  </div>
+            </div>
+            <div *ngIf="!loading">
+                <button 
+                type="submit" 
+                class="btn btn-primary mb-2">Enviar</button>
+            </div>
+            
+        </form>
+    </div>    
+    <div *ngIf="key!=null">
+        <p><b>Ups!!!</b> Hubo un error y ahora quieres corregir tu encuesta??</p>
+        <p>Elimina tu encuesta para poder subir otro archivo, esta vez no te confundas. 😓</p>
+        <button 
+                type="submit" 
+                (click) = "eliminarEncuesta()"
+                class="btn btn-danger">ELIMINAR ENCUESTA</button>
+                <!--div *ngIf="cuestionario">
+                    <form [formGroup]="editQuestionForm" (ngSubmit)="onEdit()">
+                        <div class="form-group">                            
+                            <small id="editQuestionName" class="form-text text-muted">Titulo del cuestionario.</small>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="editQuestionName" 
+                                aria-describedby="editQuestionName" 
+                                placeholder="Preguntas basicas" 
+                                formControlName="editQuestionName">                
+                        </div>
+                    </form>
+                </div--> 
+    </div>
+</body>

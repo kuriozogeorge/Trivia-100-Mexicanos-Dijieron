@@ -88,7 +88,7 @@ export class RegisterComponent implements OnInit {
 
   cargaEncuenta(){
     let key = this.triviaForm.get('triviaQuestion')?.value;
-    let data = this.apiService.getEncuenta(key);
+    let data = this.apiService.getEncuesta(key);
     data.valueChanges().subscribe( (x) => {  
       this.triviaForm.get('triviaQuestions')?.setValue(x);
     });
